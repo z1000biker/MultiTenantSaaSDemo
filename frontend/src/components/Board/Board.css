@@ -1,0 +1,93 @@
+.board {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.board-header {
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.board-content {
+    flex: 1;
+    overflow-x: auto;
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+.lists-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    min-height: 500px;
+    padding-bottom: var(--spacing-lg);
+}
+
+.list {
+    min-width: 300px;
+    max-width: 300px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 200px);
+}
+
+.list-header {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border);
+}
+
+.list-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.tasks {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.task-card {
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.task-card:hover {
+    transform: translateX(2px);
+}
+
+.task-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+}
+
+.task-assignee {
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border);
+}
+
+.add-list-btn {
+    min-width: 300px;
+    max-width: 300px;
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all var(--transition-base);
+}
+
+.add-list-btn:hover {
+    color: var(--text-primary);
+    transform: scale(1.02);
+}
