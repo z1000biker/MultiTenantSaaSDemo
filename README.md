@@ -129,18 +129,6 @@ docker-compose up -d
      - Admin credentials
 
 2. **Login**
-   - Use your subdomain: "acme"
-   - Email and password from registration
-
-3. **Create your first project**
-   - Click "New Project"
-   - Add lists and tasks
-   - Invite team members
-
-## 📁 Project Structure
-
-```
-MultiTenantSaaSDemo/
 ├── backend/
 │   ├── models/           # Database models
 │   │   ├── tenant.py     # Tenant model (master DB)

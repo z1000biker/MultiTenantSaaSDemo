@@ -1,0 +1,15 @@
+# Render.com deployment configuration
+# This file is automatically detected by Render
+
+# Build command
+build = "pip install -r requirements.txt"
+
+# Start command  
+start = "gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 'app:create_app()'"
+
+# Health check path
+healthCheckPath = "/health"
+
+# Environment
+[env]
+PYTHON_VERSION = "3.11.0"
