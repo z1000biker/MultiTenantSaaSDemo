@@ -115,6 +115,37 @@ Deploy your multi-tenant SaaS application to the cloud for **FREE** using:
    - Visit: `https://your-app.onrender.com/health`
    - Should return: `{"status": "healthy"}`
 
+8. **Initialize Database Tables** ⚠️ **IMPORTANT**
+   
+   After first deployment, you need to create the database tables. Choose one method:
+   
+   **Method A: Using Render Shell** (Recommended)
+   - In Render dashboard → Your web service
+   - Click "Shell" tab (top right)
+   - Run:
+   ```bash
+   python init_db_render.py
+   ```
+   - You should see: "✅ DATABASE INITIALIZATION COMPLETE!"
+   
+   **Method B: Automatic on Next Deploy**
+   - The app now auto-creates tables on startup if they don't exist
+   - Just trigger a redeploy in Render
+   - Check logs to see "✅ Database tables created successfully!"
+   
+   **Method C: Manual Python Shell**
+   - In Render Shell, run:
+   ```python
+   python
+   >>> from app import create_app
+   >>> from models import db
+   >>> app = create_app()
+   >>> with app.app_context():
+   ...     db.create_all()
+   ...     print("Tables created!")
+   >>> exit()
+   ```
+
 ---
 
 ## 🎨 Step 3: Frontend Deployment (Vercel)

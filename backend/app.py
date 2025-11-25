@@ -45,6 +45,29 @@ def create_app(config_name=None):
     app.register_blueprint(lists_bp)
     app.register_blueprint(tasks_bp)
     
+    # Initialize database tables on first run
+    with app.app_context():
+        try:
+            # Check if tables exist by trying to query
+            from sqlalchemy import inspect
+            inspector = inspect(db.engine)
+            tables = inspector.get_table_names()
+            
+            if not tables or 'tenants' not in tables:
+                print("📦 Initializing database tables...")
+                db.create_all()
+                print("✅ Database tables created successfully!")
+            else:
+                print(f"✓ Database already initialized ({len(tables)} tables found)")
+        except Exception as e:
+            print(f"⚠️  Database initialization check failed: {e}")
+            print("📦 Attempting to create tables...")
+            try:
+                db.create_all()
+                print("✅ Database tables created successfully!")
+            except Exception as create_error:
+                print(f"❌ Failed to create tables: {create_error}")
+    
     # Health check endpoint
     @app.route('/health')
     def health():
