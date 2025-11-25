@@ -44,9 +44,23 @@ class TenantMiddleware:
     
     def _should_skip_tenant_detection(self):
         """Check if tenant detection should be skipped for this route"""
-        # Skip for health checks, tenant creation, etc.
-        skip_paths = ['/health', '/api/tenants']
-        return any(request.path.startswith(path) for path in skip_paths)
+        # Public endpoints that don't require tenant context
+        public_endpoints = [
+            '/health',
+            '/',
+            '/api/tenants',  # Tenant creation (POST) and listing (GET)
+        ]
+        
+        # Check if path matches any public endpoint
+        for endpoint in public_endpoints:
+            if request.path == endpoint or request.path.startswith(endpoint + '/'):
+                return True
+        
+        # Also skip for OPTIONS requests (CORS preflight)
+        if request.method == 'OPTIONS':
+            return True
+        
+        return False
     
     def _extract_subdomain(self):
         """Extract subdomain from request"""
